@@ -112,4 +112,13 @@ print(max_pair)  # 输出: ('b', 25)
 
 
 
+#循环
+"""
+for i in range(start, stop, step):
+start: 迭代的起始值（包括 start）。
+stop: 迭代的终止值（不包括 stop）。
+step: 迭代的步长（可以是负数，表示倒序）。
+"""
 
+for i in range(5, -1, -1):
+    print(i) # 5,4,3,2,1,0
