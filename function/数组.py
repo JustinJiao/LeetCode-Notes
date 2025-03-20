@@ -14,6 +14,8 @@ removed = arr.pop(1) #移除并返回索引1处的元素 O(N) 因为后续的元
 del arr[1]           #移除但不返回删除的元素 O(N)   因为后续的元素需要移动
 filtered_arr = [x for x in arr if x%2 !=0] # 用列表进行筛选
 arr[1:3] =[] #批量删除
+list.remove(x) #移除指定元素的函数 无返回值，但会修改原列表，x如果不在的话会报错 O(n)
+
 
 #查询元素
 element = arr[2] #返回arr中索引为2的元素 O(1)
