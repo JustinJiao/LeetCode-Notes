@@ -2,6 +2,9 @@
 # 题目链接: https://leetcode.cn/problems/minimum-window-substring/description/
 
 #方法一：双指针（滑动窗口） + 哈希表
+from typing import Counter
+
+
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
         def check(dic)->bool:
