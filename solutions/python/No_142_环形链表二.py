@@ -1,7 +1,6 @@
-# LeetCode No.160 相交链表
-# 题目链接: https://leetcode.cn/problems/intersection-of-two-linked-lists/
+# LeetCode No.142 环形链表二
+# 题目链接: https://leetcode.cn/problems/linked-list-cycle-ii/
 
-#方法一：双指针
 from typing import Optional
 import sys
 import ast
@@ -47,12 +46,7 @@ def linklist_to_list(head):
 
 def main():
     data = sys.stdin.read().split()
-    n = int(data[0])
-    l = list(map(int,data[1:]))
-    linklist = list_To_Linklist(l)
-    result = removeNthFromEnd(linklist,n)
-    result2 = linklist_to_list(result)
-    print(result2)
+    
 
 if __name__ == "__main__":
     main()
