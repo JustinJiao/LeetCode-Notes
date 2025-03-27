@@ -30,3 +30,9 @@ t = defaultdict(int)
 from collections import Counter
 s1 = Counter(s)
 t1 = Counter(t)
+
+
+##defaultdic用于分组场景，当访问不存在的键的时候，自动创建一个空列表
+##Counter主要用于计数，统计各个元素出现的次数。
+
+#哈希的键必须是不可变的，所以可以使用tuple把list变为tuple作为键存入
