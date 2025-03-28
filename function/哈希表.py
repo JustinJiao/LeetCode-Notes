@@ -34,6 +34,9 @@ from collections import Counter
 s1 = Counter(s)
 t1 = Counter(t)
 
+#最普通的是
+hashmap = dict()
+
 
 ##defaultdic用于分组场景，当访问不存在的键的时候，自动创建一个空列表
 ##Counter主要用于计数，统计各个元素出现的次数。
