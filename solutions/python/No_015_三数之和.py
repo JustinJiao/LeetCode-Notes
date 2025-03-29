@@ -3,7 +3,7 @@
 
 from typing import List
 
-#方法一：用字典存储
+#方法一：用双指针
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         result = []

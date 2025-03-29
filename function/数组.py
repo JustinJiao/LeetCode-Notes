@@ -31,11 +31,15 @@ lst = [0, 1, 2, 3, 4, 5]
 # 提取索引2到4的子列表（不包含索引5）
 sub_list = lst[2:5]  # 【2，3，4】
 
+#切片会忽略超出界限的行为只取到结尾
+
 # 复制整个列表（浅拷贝）
 copy_list = lst[:]
 
 # 反转列表
-reversed_list = lst[::-1]
+reversed_list = lst[::-1]#不会修改原数据，而是返回一个新对象
+lst.reverse()#直接修改不返回新列表
+reversed(lst)#返回一个迭代器
 
 sub_list = lst[start:end:step]
 
