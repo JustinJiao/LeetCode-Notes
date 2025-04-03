@@ -59,3 +59,51 @@ print(q.get())  # 输出 3
 
 print(q.empty())  # 是否为空，True
 
+
+#堆
+#heapq 是 默认最小堆，也就是最小的元素在开头。
+
+#创建最小堆
+import heapq
+
+heap = []  # 定义一个空堆
+heapq.heappush(heap, 3)  # 插入元素 3 O(logn)
+heapq.heappush(heap, 1)  # 插入元素 1
+heapq.heappush(heap, 5)  # 插入元素 5
+
+print(heap)  # 输出 [1, 3, 5]，堆的最小值在索引 0 处
+
+#取值：
+min_val = heapq.heappop(heap)  # 弹出堆顶（最小值）
+print(min_val)  # 输出 1
+print(heap)  # [3, 5]
+#heapq.heapop()删除并返回堆顶元素 O(log n)
+
+min_val = heap[0]  # 直接访问堆顶元素（最小值） O(1)
+print(min_val)  # 输出 3 
+
+
+#一次性建立最小堆
+nums = [3, 1, 5, 2, 4]
+heapq.heapify(nums)  # 直接转换为最小堆
+print(nums)  # 输出 [1, 2, 5, 3, 4]，最小值在索引 0
+
+
+#实现最大堆
+max_heap = []
+heapq.heappush(max_heap, -3)  # 插入 -3
+heapq.heappush(max_heap, -1)  # 插入 -1
+heapq.heappush(max_heap, -5)  # 插入 -5
+
+print(-heapq.heappop(max_heap))  # 输出 5（最大值）
+#插入-x,取出用-heapq.heappop(max_heap)即可
+
+
+#获取前k个最小的元素
+nums = [5, 2, 9, 1, 7, 6]
+print(heapq.nsmallest(3, nums))  # 输出 [1, 2, 5]
+O(nlogk)
+
+#获取前k个最大的元素
+print(heapq.nlargest(3, nums))  # 输出 [9, 7, 6]
+
