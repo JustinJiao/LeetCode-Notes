@@ -7,36 +7,50 @@ from typing import Counter
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        def check(dic)->bool:
-            for key, val in need.items():
-                if dic[key] < need[key]:
-                    return False
-            return True
-
+        def check(dic,target):
+            return all(dic[k] >=target[k] for k in target)
 
         left = 0
-        result = ""
-        resultL = float('inf')
-        subString = 0
-        n = len(s)
-        target = list[t]
-        cnt = Counter()
-        need = Counter(t)
-        for right in range(n):
-            cnt[s[right]] += 1
-            while check(cnt):
-                subString = right - left +1
-                if subString < resultL:
-                    result = s[left:right +1]
-                    resultL = subString
-                cnt[s[left]] -= 1
-                if cnt[s[left]] == 0:
-                    cnt.pop(s[left])
+        substring = ""
+        sublength = float("inf")
+        target = Counter(t)
+        dic = Counter()
+        for right in range(0,len(s)):
+            dic[s[right]]+=1
+            while check(dic,target):
+                curlength = right-left +1
+                if curlength<sublength:
+                    substring = s[left:right+1]
+                    sublength = len(substring)
+                dic[s[left]]-=1
+                if dic[s[left]] == 0:
+                    dic.pop(s[left])
                 left +=1
-        return result
-
+        return substring
         
-        
+#优化：使用need来追踪，当遍历一个s的时候，那么此时加入进去的字母看是否对于覆盖t有效，如果有效那么need-1
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        need = len(t)
+        left = 0
+        substring = ""
+        sublength = float("inf")
+        target = Counter(t)
+        dic = Counter()
+        for right in range(0,len(s)):
+            dic[s[right]]+=1
+            if dic[s[right]]<=target[s[right]]:
+                need-=1
+            while need == 0:
+                curlength = right-left +1
+                if curlength<sublength:
+                    substring = s[left:right+1]
+                    sublength = len(substring)
+                dic[s[left]]-=1
+                if dic[s[left]] < target[s[left]]:
+                    need +=1
+                left +=1
+        return substring
         
         
             
