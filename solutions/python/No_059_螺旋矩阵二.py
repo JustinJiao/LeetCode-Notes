@@ -4,41 +4,35 @@
 import sys
 from typing import List
 
-def generateMatrix( n: int) -> List[List[int]]:
-        nums = []
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        result = []
         for _ in range(n):
-            row = [0] * n
-            nums.append(row)
-        starX, starY = 0,0
-        offset = 1
-        count =1
-        loop = n//2
-        while(loop):
-            for i in range(starX,n-offset):##上边，从左至右
-                nums[starX][i] = count
+            row = [0]*n
+            result.append(row)
+        left = 0
+        right = n-1
+        top = 0
+        bottom = n-1
+        count = 1
+        while left <= right and top <= bottom:
+            for i in range(left,right+1):
+                result[top][i] = count
                 count +=1
-            for i in range(starY,n-offset):##右边，从上至下
-                nums[i][n-offset] = count
-                count += 1
-            for i in range(n-offset,starY,-1):
-                nums[n-offset][i] = count ##下边，从右至左
+            top+=1
+            for i in range(top,bottom+1):
+                result[i][right] = count
                 count+=1
-            for i in range(n-offset,starX,-1): ##左边，从上至下
-                nums[i][starY] = count
-                count+=1
-            starX +=1
-            starY +=1
-            offset +=1
-            loop -=1
-        if n%2 !=0:
-            nums[n//2][n//2] = count    
-        return nums
-        
-def main():
-    n = int(sys.stdin.readline().strip())
-    result = generateMatrix(n)
-    print(result)
-if __name__ == '__main__':
-    main()
-            
+            right -= 1
+            if top <= bottom:
+                for i in range(right,left-1,-1):
+                    result[bottom][i] = count
+                    count+=1
+                bottom -=1
+            if left <= right:
+                for i in range(bottom,top-1,-1):
+                    result[i][left] = count
+                    count +=1
+                left +=1
+        return result
         

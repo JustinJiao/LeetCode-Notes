@@ -5,51 +5,39 @@ import ast
 import sys
 from typing import List
 
-def spiralOrder(matrix: List[List[int]]) -> List[int]:
+from typing import List
+
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        result = []
         m = len(matrix)
         n = len(matrix[0])
-        result = []
-        starX, starY = 0,0
-        offset = 1
-        count = 0
-        while count < m*n:
-            if m*n -len(result) == 1:
-                result.append(matrix[m//2][m//2])
-                return result
-            for i in range(starY,n-offset):
-                num = matrix[starX][i] #上边，从左至右
-                result.append(num)
-                count+=1
-                if count == m*n:
-                    return result
-            for i in range(starX,m-offset): #右边，从上至下
-                num = matrix[i][n-offset]
-                result.append(num)
-                count+=1
-                if count == m*n:
-                    return result
-            for i in range(n-offset,starX,-1):#下边，从右至左
-                num = matrix[m-offset][i]
-                result.append(num)
-                count+=1
-                if count == m*n:
-                    return result
-            for i in range(m-offset,starY,-1):#左边，从下至上
-                num = matrix[i][starY]
-                result.append(num)
-                count+=1
-                if count == m*n:
-                    return result
-            starX+=1
-            starY +=1
-            offset+=1
-            
-        
-def main():
-    n = ast.literal_eval(sys.stdin.read().strip())
-    result = spiralOrder(n)
-    print(result)
-if __name__ == '__main__':
-    main()
-            
+        top, bottom = 0, m - 1
+        left, right = 0, n - 1
+
+        while left <= right and top <= bottom:
+            # 上边界
+            for i in range(left, right + 1):
+                result.append(matrix[top][i])
+            top += 1
+
+            # 右边界
+            for i in range(top, bottom + 1):
+                result.append(matrix[i][right])
+            right -= 1
+
+            if top <= bottom: #注意这里，如果top > bottom说明这一行已经加过了，就不需要重新加了
+                # 下边界
+                for i in range(right, left - 1, -1):
+                    result.append(matrix[bottom][i])
+                bottom -= 1
+
+            if left <= right:#这里也是一样的，如果left>right说明这一列已经加过了，所以不需要再加了
+                # 左边界
+                for i in range(bottom, top - 1, -1):
+                    result.append(matrix[i][left])
+                left += 1
+
+        return result
+
         
