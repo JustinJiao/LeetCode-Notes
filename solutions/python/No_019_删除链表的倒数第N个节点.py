@@ -59,6 +59,26 @@ def main():
 if __name__ == "__main__":
     main()
     
+##方法二：计算长度
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        size = 0
+        cur = head
+        while cur:
+            size+=1
+            cur = cur.next
+        dummy = ListNode(next = head)
+        cur = dummy
+        for i in range(size-n):
+            cur = cur.next
+        cur.next = cur.next.next
+        return dummy.next
+    
     
             
             
