@@ -27,6 +27,21 @@ class Solution:
             result.append(cur.val)
         help(root,result)
         return result
+#方法二：
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        if not root:
+            return result
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            result.append(node.val)
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
+        return result[::-1]
     
             
             

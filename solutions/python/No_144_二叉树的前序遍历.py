@@ -28,7 +28,24 @@ class Solution:
         help(root,result)
         return result
     
-            
+#方法二：
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        result = []
+        stack = [root]
+        while stack:
+            #中
+            node=stack.pop()
+            result.append(node.val)
+            #左
+            if node.right:
+                stack.append(node.right)
+            #右
+            if node.left:
+                stack.append(node.left)
+        return result
             
         
             
