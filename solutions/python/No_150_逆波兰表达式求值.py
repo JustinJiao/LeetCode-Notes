@@ -5,38 +5,32 @@ from typing import List
 #方法一：栈
 class Solution:
     def evalRPN(self, tokens: List[str]) -> int:
-        def div(x,y):
-            if x * y >0:
-                return int(x/y)
-            else:
-                return -(abs(x)//abs(y))
-        stack = []
+        l = []
         result = 0
-        for item in tokens:
-            if item == "+":
-                result = stack[-2]+stack[-1]
-                stack.pop()
-                stack.pop()
-                stack.append(result)
-            elif item == "-":
-                result = stack[-2]-stack[-1]
-                stack.pop()
-                stack.pop()
-                stack.append(result)
-            elif item == "*":
-                result = stack[-2] *stack[-1]
-                stack.pop()
-                stack.pop()
-                stack.append(result)
-            elif item == "/":
-                result = div(stack[-2],stack[-1])
-                stack.pop()
-                stack.pop()
-                stack.append(result)
+        for i in tokens:
+            if i == '+':
+                n1 = int(l.pop())
+                n2 = int(l.pop())
+                result  = n2 + n1
+                l.append(result)
+            elif i == '-':
+                n1 = int(l.pop())
+                n2 = int(l.pop())
+                result = (n2-n1)
+                l.append(result)
+            elif i == '*':
+                n1 = int(l.pop())
+                n2 = int(l.pop())
+                result = (n2 * n1)
+                l.append(result)
+            elif i == '/':
+                n1 = int(l.pop())
+                n2 = int(l.pop())
+                result = int(n2/n1)
+                l.append(result)
             else:
-                stack.append(int(item))
-        return stack[0]
-
+                l.append(int(i))
+        return l[0]
 
     
             

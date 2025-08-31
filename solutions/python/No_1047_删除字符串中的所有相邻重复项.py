@@ -1,4 +1,4 @@
-# LeetCode No.977 有序数组的平方
+# LeetCode No.1047 删除字符串中的所有相邻重复项
 # 题目链接: https://leetcode.cn/problems/squares-of-a-sorted-array/description/
 
 
