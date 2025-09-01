@@ -43,5 +43,24 @@ class Solution:
                 cur = cur.right
         return result
         
-            
+#方法三：空指针遍历
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        stack = []
+        if root:
+            stack.append(root)
+        while stack:
+            node = stack.pop()
+            if node:
+                if node.right:
+                    stack.append(node.right)
+                stack.append(node)
+                stack.append(None)
+                if node.left:
+                    stack.append(node.left)
+            else:
+                node = stack.pop()
+                result.append(node.val)
+        return result
         
