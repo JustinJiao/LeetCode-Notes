@@ -63,4 +63,20 @@ class Solution:
                 node = stack.pop()
                 result.append(node.val)
         return result
-        
+## boolean标记法
+def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        stack = []
+        result = []
+        if root:
+            stack.append((root,False))
+        while stack:
+            node,visted = stack.pop()
+            if visted:
+                result.append(node.val)
+                continue
+            if node.right:
+                stack.append((node.right,False))
+            stack.append((node,True))
+            if node.left:
+                stack.append((node.left,False))
+        return result
