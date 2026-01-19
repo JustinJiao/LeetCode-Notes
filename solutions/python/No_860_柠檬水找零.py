@@ -3,26 +3,29 @@
 
 #方法一：贪心
 from typing import List
+
 class Solution:
     def lemonadeChange(self, bills: List[int]) -> bool:
-        money = [0] * 21
-        money[5] = 0
-        money[10] = 0
-        money[20] = 0
+        five = 0
+        ten = 0
+        twenty = 0
         for i in bills:
             if i == 5:
-                money[i] +=1
+                five +=1
             elif i == 10:
-                money[i] +=1
-                money[5] -=1
-                if money[5] <0:
+                if five>=1:
+                    five -=1
+                    ten +=1
+                else:
                     return False
-            else:
-                if money[10] >=1 and money[5] >=1:
-                    money[10] -=1
-                    money[5] -=1
-                elif money[10] <1 and money[5] >=3:
-                    money[5] -=3
+            elif i == 20:
+                if ten >= 1 and five >=1:
+                    ten -=1
+                    five -=1
+                    twenty +=1
+                elif ten<1 and five>=3:
+                    five -=3
+                    twenty +=1
                 else:
                     return False
         return True
