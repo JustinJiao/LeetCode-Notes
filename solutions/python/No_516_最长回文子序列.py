@@ -1,6 +1,7 @@
 # LeetCode No.516 最长回文子序列
 # 题目链接: https://leetcode.cn/problems/longest-palindromic-subsequence/
 
+
 class Solution:
     def longestPalindromeSubseq(self, s: str) -> int:
         dp = [[0] * len(s) for _ in range(len(s))]
