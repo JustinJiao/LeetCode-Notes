@@ -12,3 +12,26 @@ class Solution:
                     dp[i] = max(dp[i],dp[j]+1)
             resulst = max(resulst,dp[i])
         return resulst
+
+#方法二：用tails数组
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        def help(arr,target):
+            left,right = 0,len(arr)-1
+            result = len(arr)
+            while left <= right:
+                mid = (left + right) // 2
+                if arr[mid] >= target:
+                    right = mid-1
+                    result = mid
+                else:
+                    left = mid +1
+            return result
+        tail = []
+        for x in nums:
+            index = help(tail,x)
+            if index == len(tail):
+                tail.append(x)
+            else:
+                tail[index] = x
+        return len(tail)
