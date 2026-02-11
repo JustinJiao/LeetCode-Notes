@@ -31,27 +31,26 @@ class Solution:
 #优化：使用need来追踪，当遍历一个s的时候，那么此时加入进去的字母看是否对于覆盖t有效，如果有效那么need-1
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
+        from collections import Counter
         need = len(t)
         left = 0
-        substring = ""
-        sublength = float("inf")
         target = Counter(t)
-        dic = Counter()
-        for right in range(0,len(s)):
-            dic[s[right]]+=1
-            if dic[s[right]]<=target[s[right]]:
-                need-=1
+        window = Counter()
+        min_length = float('inf')
+        start = 0
+        for right in range(len(s)):
+            cur = s[right]
+            window[cur] +=1
+            if window[cur]<=target[cur]:
+                need -=1
             while need == 0:
-                curlength = right-left +1
-                if curlength<sublength:
-                    substring = s[left:right+1]
-                    sublength = len(substring)
-                dic[s[left]]-=1
-                if dic[s[left]] < target[s[left]]:
+                if right - left +1 < min_length:
+                    start = left
+                    min_length = right - left +1
+                window[s[left]] -=1
+                if window[s[left]]< target[s[left]]:
                     need +=1
                 left +=1
-        return substring
-        
-        
-            
-        
+        if min_length == float('inf'):
+            return ''
+        return s[start:start+min_length]
