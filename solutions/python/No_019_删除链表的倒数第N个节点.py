@@ -1,5 +1,5 @@
-# LeetCode No.206 翻转链表
-# 题目链接: https://leetcode.cn/problems/reverse-linked-list/description/
+# LeetCode No.019 删除链表的倒数第N个节点
+# 题目链接: https://leetcode.cn/problems/remove-nth-node-from-end-of-list/description/
 
 #方法一：双指针
 from typing import Optional
@@ -11,20 +11,15 @@ class ListNode:
         self.val = val
         self.next = next
 #方法一：虚拟头节点+双指针   
-def removeNthFromEnd(head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        if n < 0:
-            return head
-        dummy = ListNode(0)
-        dummy.next = head
+def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy = ListNode(0,head)
         left = dummy
         right = dummy
-        while right.next:
-            if n>0:
-                right = right.next
-                n-=1
-            else:
-                left = left.next
-                right = right.next
+        for _ in range(n+1):
+            right = right.next
+        while right:
+            left = left.next
+            right = right.next
         left.next = left.next.next
         return dummy.next
 
