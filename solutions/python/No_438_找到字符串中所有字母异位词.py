@@ -19,27 +19,23 @@ class Solution:
         return result   
         
         
-#方法二：defaultdict   
+#方法二：滑动窗口+ dic（计数）
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        from collections import Counter
-        p_l = [0]*26
-        s_l = [0]*26
         result = []
-        if len(s)< len(p):
-            return result
-        for i in range(len(p)):
-            p_l[ord(p[i])-ord('a')] +=1
-            s_l[ord(s[i])-ord('a')] +=1
-        if p_l == s_l:
-            result.append(0)
         left = 0
-        while left < len(s)-len(p):
-            s_l[ord(s[left])-ord('a')] -=1
-            s_l[ord(s[left+len(p)])-ord('a')] +=1
-            if s_l == p_l:
-                result.append(left+1)
-            left+=1
+        target = [0] * 26
+        for char in p:
+            target[ord(char)-ord('a')] +=1
+        window = [0]*26
+        for right in range(len(s)):
+            window[ord(s[right])-ord('a')]+=1
+            curlength = right - left +1
+            if curlength > len(p):
+                window[ord(s[left])-ord('a')]-=1
+                left +=1
+            if window == target:
+                result.append(left)
         return result
     
 
