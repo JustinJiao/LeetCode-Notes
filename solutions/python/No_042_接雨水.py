@@ -5,20 +5,20 @@ from typing import List
 #方法一：单调栈
 class Solution:
     def trap(self, height: List[int]) -> int:
-        sum = 0
-        stack = [0]
-        for i in range(1,len(height)):
-            if height[i] <= height[stack[-1]]:
-                stack.append(i)
-            else:
-                while len(stack) >0 and height[i] > height[stack[-1]]:
-                    middle = stack[-1]
-                    stack.pop()
-                    if len(stack)> 0:
-                        h = min(height[i],height[stack[-1]])-height[middle]
-                        w = i-stack[-1]-1
-                        sum += h*w
-                stack.append(i)
-        return sum
+        stack = []
+        result = 0
+        for i in range(len(height)):
+            while stack and height[i] > height[stack[-1]]:
+                mid = height[stack[-1]]
+                stack.pop()
+                if stack:
+                    left= stack[-1]
+                    right= i
+                    h = min(height[left],height[right])-mid
+                    width = right-left -1
+                    result += h * width
+            stack.append(i)
+        return result
+
             
         

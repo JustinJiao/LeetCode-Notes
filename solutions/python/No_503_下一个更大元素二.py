@@ -4,20 +4,13 @@
 #方法一：单调栈
 class Solution:
     def nextGreaterElements(self, nums: List[int]) -> List[int]:
-        result = [-1]*len(nums)
-        stack = [0]
-        longnums = nums*2
-        for i in range(1,len(longnums)):
-            if longnums[i] <= longnums[stack[-1]]:
-                stack.append(i)
-            else:
-                while len(stack)>0 and longnums[i] > longnums[stack[-1]]:
-                    if stack[-1] >= len(nums):
-                        index = stack[-1]-len(nums)
-                    else:
-                        index = stack[-1]
-                    if result[index] == -1:
-                        result[index] = longnums[i]
-                    stack.pop()
+        stack = []
+        n = len(nums)
+        result = [-1] * n
+        for i in range(2*n):
+            while stack and nums[i%n] > nums[stack[-1]]:
+                result[stack[-1]] = nums[i%n]
+                stack.pop()
+            if i < n:
                 stack.append(i)
         return result
