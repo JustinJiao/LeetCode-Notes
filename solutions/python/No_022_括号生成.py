@@ -3,27 +3,20 @@
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-        path = []
         result = []
-        l = ['(',')']
-        dic ={'(':0,')':0}
-        def help():
-            if dic['('] == n:
-                count = dic['('] - dic[')']
-                for j in range(count):
-                    path.append(')')
+        path = []
+        def help(left_count,right_count):
+            if len(path) == 2 *n:
                 result.append(''.join(path))
-                for j in range(count):
-                    path.pop()
                 return
-            for i in l:
-                if i == ')' and dic['('] == dic[')']:
-                    continue
-                path.append(i)
-                dic[i] +=1
-                help()
+            if left_count<n:
+                path.append('(')
+                help(left_count+1,right_count)
                 path.pop()
-                dic[i] -=1
-        help()
+            if right_count < left_count:
+                path.append(')')
+                help(left_count,right_count+1)
+                path.pop()
+        help(0,0)
         return result
     
